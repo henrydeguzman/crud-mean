@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { PostService } from '../post.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Post } from '../post.model';
+import { post } from 'selenium-webdriver/http';
 
 @Component({
     selector: 'app-post-create',
@@ -23,7 +24,9 @@ export class PostCreateComponent implements OnInit {
             if (paramMap.has('id')) {
                 this.mode = 'edit';
                 this.id = paramMap.get('id');
-                this.post = this.postsService.getPost(this.id);
+                this.postsService.getPost(this.id).subscribe(postData => {
+                    this.post = {id: postData._id, title: postData.title, content: postData.content};
+                });
             } else {
                 this.mode = 'create';
                 this.id = null;
