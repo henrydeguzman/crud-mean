@@ -14,7 +14,7 @@ export class PostService {
     constructor(private http: HttpClient) {}
 
     getPosts() {
-        //return [...this.posts];
+        // return [...this.posts];
         this.http.get<{message: string, posts: any }>('http://localhost:3000/api/posts')
             .pipe(map((postData) => {
                 return postData.posts.map(post => {
@@ -37,7 +37,7 @@ export class PostService {
 
     addPost(title: string, content: string) {
         const post: Post = {id: null, title, content};
-        this.http.post<{message: string, id: string}>("http://localhost:3000/api/posts", post)
+        this.http.post<{message: string, id: string}>('http://localhost:3000/api/posts', post)
             .subscribe((res) => {
                 const id = res.id;
                 post.id = id;
@@ -47,7 +47,7 @@ export class PostService {
     }
 
     deletePost(postid: string) {
-        this.http.delete("http://localhost:3000/api/posts/" + postid)
+        this.http.delete('http://localhost:3000/api/posts/' + postid)
             .subscribe(() => {
                 console.log('service dleted!');
                 console.log(this.posts);
