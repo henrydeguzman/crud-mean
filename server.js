@@ -1,5 +1,6 @@
 const app = require('./backend/app');
 const http = require('http');
+const debug = require('debug')("crud-mean");
 
 const normalizePort = val => {
     var port = parseInt(val, 10);
