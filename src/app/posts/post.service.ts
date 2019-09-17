@@ -35,6 +35,16 @@ export class PostService {
         return this.postsUpdated.asObservable();
     }
 
+    getPost(id: string) {
+        return {...this.posts.find(p => p.id === id)};
+    }
+
+    updatePost(id: string, title: string, content: string) {
+        const post: Post = {id, title, content};
+        this.http.put('http://localhost:3000/api/posts/' + id, post)
+            .subscribe(response => console.log(response));
+    }
+
     addPost(title: string, content: string) {
         const post: Post = {id: null, title, content};
         this.http.post<{message: string, id: string}>('http://localhost:3000/api/posts', post)
