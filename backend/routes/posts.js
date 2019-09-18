@@ -17,16 +17,16 @@ const storage = multer.diskStorage({
         if(isValid) {
             error = null;
         }
-        cb(error, "backend/assets/images");
+        cb(error, "backend/uploads/images");
     },
-    fiilename: (req, file, cb) => {
+    filename: (req, file, cb) => {
         const name = file.originalname.toLowerCase().split(' ').join('-');
         const ext = MIME_TYPE_MAP[file.mimetype];
         cb(null, name+'-'+Date.now()+'.'+ext);
     }
 });
 
-router.post("",multer(storage).single("image"), (req, res, next) => {
+router.post("", multer({ storage: storage }).single("image"), (req, res, next) => {
     const posts = new Post({
         title: req.body.title,
         content: req.body.content
