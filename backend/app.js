@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -14,7 +15,9 @@ mongoose.connect("mongodb+srv://rnw:1ybMjv6mMUCMI5SV@cluster0-gyh6x.mongodb.net/
         console.log("Connection failed!");
     });
 
-app.use(bodyParser.json()); app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.json()); app.use(bodyParser.urlencoded({extended:false}));
+// activate to accessible.
+app.use("/uploads/images", express.static(path.join("backend/uploads/images")));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin',"*");
