@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PostService } from '../post.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Post } from '../post.model';
+import { mimeType } from './mime-type.validator';
 
 @Component({
     selector: 'app-post-create',
@@ -17,7 +18,7 @@ export class PostCreateComponent implements OnInit {
     post: Post;
     isLoading = false;
     form: FormGroup;
-    imagePreview: {};
+    imagePreview: string;
     constructor(public postsService: PostService, public route: ActivatedRoute) {}
 
 
@@ -25,7 +26,10 @@ export class PostCreateComponent implements OnInit {
         this.form = new FormGroup({
             title: new FormControl(null, {validators: [Validators.required, Validators.minLength(3)]}),
             content: new FormControl(null, {validators: [Validators.required]}),
-            image: new FormControl(null, {validators: [Validators.required]})
+            image: new FormControl(null, {
+                validators: [Validators.required],
+                asyncValidators: [mimeType]
+            })
         });
 
         this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -68,7 +72,7 @@ export class PostCreateComponent implements OnInit {
         this.form.get('image').updateValueAndValidity();
         const reader = new FileReader();
         reader.onload = () => {
-            this.imagePreview = reader.result;
+            this.imagePreview = reader.result as string;
         };
         reader.readAsDataURL(file);
     }
