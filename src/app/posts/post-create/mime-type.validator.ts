@@ -1,6 +1,11 @@
 import { AbstractControl } from '@angular/forms';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, of } from 'rxjs';
 export const mimeType = (control: AbstractControl): Promise<{ [key: string]: any}> | Observable<{ [key: string]: any}> => {
+    // validate if string for update with no changes in the path.
+    if (typeof(control.value) === 'string') {
+        // of is q quick and easy way of adding or create an observable which will emit data immediately.
+        return of(null);
+    }
     const file = control.value as File;
     const fileReader = new FileReader();
     const frObs = new Observable((observer: Observer<{ [key: string]: any}>) => {
