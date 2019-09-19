@@ -9,7 +9,8 @@ import {
     MatButtonModule,
     MatToolbarModule,
     MatExpansionModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatPaginatorModule
 } from '@angular/material';
 
 import { HeaderComponent } from './header/header.component';
@@ -31,7 +32,7 @@ import { PostListComponent } from './posts/post-list/post-list.component';
         AppRoutingModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatExpansionModule, MatProgressSpinnerModule,
+        MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatExpansionModule, MatProgressSpinnerModule, MatPaginatorModule,
         HttpClientModule
     ],
     providers: [],
