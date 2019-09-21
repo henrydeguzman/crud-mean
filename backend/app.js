@@ -6,7 +6,8 @@ const mongoose = require('mongoose');
 const postsRoutes = require('./routes/posts');
 
 const app = express();
-
+mongoose.set('useNewUrlParser', true); // suggested from terminal
+mongoose.set('useUnifiedTopology', true); // suggested from terminal
 mongoose.connect("mongodb+srv://rnw:1ybMjv6mMUCMI5SV@cluster0-gyh6x.mongodb.net/crud-mean?retryWrites=true&w=majority")
     .then(() => {
         console.log("Connected to databse!");

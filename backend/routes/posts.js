@@ -91,7 +91,7 @@ router.get("", (req, res, next) => {
             // defining counts.
             // documents always on the first 'then'
             fetchedPosts = documents;
-            return Post.count();
+            return Post.countDocuments();
         }).then(count => {
             // chaining multiple then made by post.count.
             res.status(200).json({
